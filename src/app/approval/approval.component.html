@@ -1,0 +1,44 @@
+<admin-navbar></admin-navbar>
+
+<div class="container">
+    <br>
+    <h1 style="text-align: center;"><b><u>All Users</u></b></h1>
+    <div class="container" *ngIf="show">
+        <div *ngIf="show; else elseBlock">
+            <div class="form-group">
+                <div class= "container">
+                        <table class ="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Username</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Mobile No</th>
+                                <th>Email</th>
+                                <th>D.O.B.</th>
+                                <th>Approved</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let user of users">
+                            <tr>
+                                <td>{{user.username}}</td>
+                                <td>{{user.firstName}}</td>
+                                <td>{{user.lastName}}</td>
+                                <td>{{user.mob_No}}</td>
+                                <td>{{user.email}}</td>
+                                <td>{{user.dob}}</td>
+                                <td>
+                            <select [(ngModel)]="user.approved" (change)="approveUser(user)">
+                            <option *ngFor="let status of approval" [ngValue]="status">{{status}}</option>
+                            </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                        </table>
+                </div>
+            </div>
+        </div>
+        <ng-template #elseBlock><h5><b>{{ error }}</b></h5></ng-template>
+              
+    </div>
+</div>

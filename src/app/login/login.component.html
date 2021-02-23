@@ -1,0 +1,35 @@
+<h1 style="text-align: center;">LOGIN</h1>
+<form #userLoginForm="ngForm" (ngSubmit)="userLogin(userLoginForm)">
+    <div class="form-group">
+        <label for="username">Username : </label>
+        <input 
+            required 
+            ngModel 
+            name="username" 
+            #username="ngModel" 
+            id="username" 
+            type="text" 
+            class="form-control">
+        <div class="alert alert-danger" *ngIf="username.touched && !username.valid">
+            Username is required.
+        </div>
+    </div>
+    <br/>
+    <div class="form-group">
+        <label for="password">Password : </label>
+        <input 
+            required 
+            ngModel 
+            name="password" 
+            #password="ngModel" 
+            id="password" 
+            type="password" 
+            class="form-control">
+        <div class="alert alert-danger" *ngIf="password.touched && !password.valid">
+            Password is required.
+        </div>
+    </div>
+    <div>
+        <button class="btn btn-primary" [disabled]="!userLoginForm.valid">Submit</button>
+    </div>
+</form>

@@ -1,0 +1,138 @@
+<head>
+#before other links
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</head>
+
+<body>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+<body>
+
+
+<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>${hsqldb.version}</version>
+		</dependency>
+
+
+//
+@Bean
+	public RestTemplate restTemplate(){
+		return new RestTemplate();
+	}
+
+	@Bean
+	public CorsFilter corsFilter(){
+		UrlBasedCorsConfigurationSource src=new UrlBasedCorsConfigurationSource();
+		CorsConfiguration configuration=new CorsConfiguration();
+		configuration.setAllowCredentials(true);
+		configuration.addAllowedHeader("*");
+		configuration.addAllowedOrigin("*");
+		configuration.addAllowedMethod("*");
+		src.registerCorsConfiguration("/**",configuration);
+		return new CorsFilter(src);
+	}
+
+
+Should we throw Front end Application specific errors or error receieved from back end, print them only?
+
+//NAVBAR for app.component.html
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" routerLink="">Library Management</a>
+        </div>
+    </div>
+    <div>
+        <li><a style="color: beige;" routerLink="/user/register">New User? Register</a></li>
+    </div>
+    <div>
+        <li><a style="color: beige;" routerLink="/user/login">Login as user</a></li>
+    </div>
+    <div>
+        <li><a style="color: beige;"routerLink="/admin/login">Login as admin</a></li>
+    </div>
+  </nav>
+<router-outlet></router-outlet>
+
+//ngFORm way for approval.component.html
+
+<form #usersApprovalForm="ngForm" (ngSubmit)=approveUsers(usersApprovalForm)>
+                                <div class="form-group">
+                                <tr>
+                                    <td ngModel name="username" #username="ngModel">{{user.username}}</td>
+                                    <td ngModel name="firstName" #firstName="ngModel">{{user.firstName}}</td>
+                                    <td ngModel name="lastName" #lastName="ngModel">{{user.lastName}}</td>
+                                    <td ngModel name="mob_No" #mob_No="ngModel">{{user.mob_No}}</td>
+                                    <td ngModel name="email" #email="ngModel">{{user.email}}</td>
+                                    <td ngModel name="DOB" #DOB="ngModel">{{user.DOB}}</td>
+                                    <td>
+                                    <div>
+                                    <select ngModel name="setApproved" #setApproved="ngModel" 
+                                    id="setApproved">
+                                        <option *ngFor="let status of approval" 
+                                         [(ngModel)]="approvedValue" [value]="status">{{status}}<option>
+                                    </select>
+                                    <submit class="btn btn-primary">Submit</submit>
+                                    </div>    
+                                    </td>
+                                </tr>
+                                </div>
+                            </form>
+
+
+
+Approval.component.html
+
+<h1 style="text-align: center;"><i><b><u>ALL USERS</u></b></i></h1>
+    <form #approvalForm="ngForm" (ngSubmit)="viewAllUsers(approvalForm)">
+        <div class="form-group">
+            <p>Click here to view all users.</p>
+            <button class="btn btn-primary" 
+            type="submit">Click me</button>
+        </div>
+    </form>
+
+
+//Approval.component.ts
+/*
+  viewAllUsers(approvalForm){
+    let result : Observable<UserDTO[]> = this.service.viewAllUsers();
+    result.subscribe(
+        (response : UserDTO[])=>{
+          this.users = response;
+          this.show = true;
+          console.log(this.users);
+        },
+        (error: Response) =>{
+          alert(error['error']['message']);
+          console.log(error['error']['message']);
+          console.log("Error",error);
+        }
+    );
+    
+  }
+  */
+
+
+
+//H2 properties
+
+spring.h2.console.enabled=true
+spring.devtools.livereload.enabled=true
+spring.datasource.platform=h2
+spring.datasource.url=jdbc:h2:mem:testdb
+server.port=8085
+
+//MYSQL
+
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.datasource.url = jdbc:mysql://localhost:3306/library
+spring.datasource.username = root
+spring.datasource.password = root
+spring.jpa.show-sql=false
+spring.jpa.hibernate.ddl-auto=update
+
+server.port=8085

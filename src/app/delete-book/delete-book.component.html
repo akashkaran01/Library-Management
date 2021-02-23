@@ -1,0 +1,23 @@
+<admin-navbar></admin-navbar>
+
+
+<h1 style="text-align: center;">DELETE BOOK</h1>
+<form #deleteBookForm="ngForm" (ngSubmit)="deleteBook(deleteBookForm)">
+    <div class="form-group">
+        <label for="bookName">Book Name : </label>
+        <input 
+            required 
+            ngModel 
+            name="bookName" 
+            #bookName="ngModel" 
+            id="bookName" 
+            type="text" 
+            class="form-control">
+        <div class="alert alert-danger" *ngIf="bookName.touched && !bookName.valid">
+            Book Name is required.
+        </div>
+    </div>
+    <div>
+        <button class="btn btn-primary" [disabled]="!deleteBookForm.valid">Delete</button>
+    </div>
+</form>

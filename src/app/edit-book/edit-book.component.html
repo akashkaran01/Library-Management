@@ -1,0 +1,47 @@
+<admin-navbar></admin-navbar>
+
+
+<h1 style="text-align: center;"> EDIT BOOK</h1>
+<form #editBookForm="ngForm" (ngSubmit)="editBook(editBookForm)">
+    <div class="form-group">
+        <label for="bookName">Book Name : </label>
+        <input 
+            name="bookName"  
+            id="bookName" 
+            type="text" 
+            [value]="bookName"
+            readonly
+            class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="authorName">Author Name : </label>
+        <input 
+            required 
+            ngModel 
+            name="authorName" 
+            #authorName="ngModel" 
+            id="authorName" 
+            type="text" 
+            class="form-control">
+        <div class="alert alert-danger" *ngIf="authorName.touched && !authorName.valid">
+            Author Name is required.
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="publishedYear">Published Year : </label>
+        <input 
+            required 
+            ngModel 
+            name="publishedYear" 
+            #publishedYear="ngModel" 
+            id="publishedYear" 
+            type="date" 
+            class="form-control">
+        <div class="alert alert-danger" *ngIf="publishedYear.touched && !publishedYear.valid">
+            Published Date is required.
+        </div>
+    </div>
+    <div>
+        <button class="btn btn-primary" [disabled]="!editBookForm.valid">Submit</button>
+    </div>
+</form>

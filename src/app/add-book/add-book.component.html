@@ -1,0 +1,50 @@
+<admin-navbar></admin-navbar>
+
+<h1 style="text-align: center;">ADD BOOK</h1>
+<form #addBookForm="ngForm" (ngSubmit)="addBook(addBookForm)">
+    <div class="form-group">
+        <label for="bookName">Book Name : </label>
+        <input 
+            required 
+            ngModel 
+            name="bookName" 
+            #bookName="ngModel" 
+            id="bookName" 
+            type="text" 
+            class="form-control">
+        <div class="alert alert-danger" *ngIf="bookName.touched && !bookName.valid">
+            Book Name is required.
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="authorName">Author Name : </label>
+        <input 
+            required 
+            ngModel 
+            name="authorName" 
+            #authorName="ngModel" 
+            id="authorName" 
+            type="text" 
+            class="form-control">
+        <div class="alert alert-danger" *ngIf="authorName.touched && !authorName.valid">
+            Author Name is required.
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="publishedYear">Published Date : </label>
+        <input 
+            required 
+            ngModel 
+            name="publishedYear" 
+            #publishedYear="ngModel" 
+            id="publishedYear" max="{{ currentDate | date: 'yyyy-MM-dd' }}"
+            type="date" 
+            class="form-control">
+        <div class="alert alert-danger" *ngIf="publishedYear.touched && !publishedYear.valid">
+            Published Date is required.
+        </div>
+    </div>
+    <div>
+        <button class="btn btn-primary" [disabled]="!addBookForm.valid">Submit</button>
+    </div>
+</form>
